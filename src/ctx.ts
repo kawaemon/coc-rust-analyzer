@@ -27,6 +27,7 @@ export class Ctx {
     const status = new StatusDisplay(this.config.checkOnSave.command);
     this.extCtx.subscriptions.push(status);
     this.client.onProgress(WorkDoneProgress.type, 'rustAnalyzer/cargoWatcher', (params) => status.handleProgressNotification(params));
+    this.client.onProgress(WorkDoneProgress.type, 'rustAnalyzer/startup', (params) => status.handleStartupProgressNotification(params));
   }
 
   registerCommand(name: string, factory: (ctx: Ctx) => Cmd) {
